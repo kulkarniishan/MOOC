@@ -49,11 +49,10 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $password2 = $row['password'];
 
         if (password_verify($checkpwd, $password2)) {
-            $secret_key = "YOUR_SECRET_KEY";
             $issuer_claim = "THE_ISSUER"; // this can be the servername
             $audience_claim = "THE_AUDIENCE";
             $issuedat_claim = time(); // issued at
-            $notbefore_claim = $issuedat_claim + 10; //not before in seconds
+            $notbefore_claim = $issuedat_claim; //not before in seconds
             $expire_claim = $issuedat_claim + 86000; // expire time in seconds
             $token = array(
                 "iss" => $issuer_claim,
