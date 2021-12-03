@@ -12,7 +12,7 @@ header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers
 
 // echo file_get_contents('php://input');
 
-print_r($_SERVER['QUERY_STRING']);
+// print_r($_SERVER['QUERY_STRING']);
 switch ($_SERVER["REQUEST_METHOD"]) {
     case "GET": {
             get($conn, $_GET);
@@ -38,7 +38,6 @@ switch ($_SERVER["REQUEST_METHOD"]) {
 //GET METHOD
 function get($conn, $get)
 {
-    print_r($get);
     if ($get && $get['string']) {
         $str = $get['string'];
         $sql = "SELECT * FROM courses WHERE name LIKE '%$str%'";
