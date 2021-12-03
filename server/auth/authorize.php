@@ -23,10 +23,6 @@ if($_COOKIE['jwt']){
         // Access is granted. Add code of the operation here 
 
         $authorized = true;
-        echo json_encode(array(
-            "message" => "Access granted:",
-            "decoded" => $decoded
-        ));
 
     }catch (Exception $e){
 
