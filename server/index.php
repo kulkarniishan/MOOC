@@ -42,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !empty($_POST)) {
         $sessionId = rand(100000000, 999999999);
         $_SESSION["SessionId"] = $sessionId;
         setcookie("SessionId", $sessionId, time() + 86400, "/", httponly: true);
+        setcookie("SessionId", $sessionId, "/");
         header('Location:home/');
       }
     } else {
