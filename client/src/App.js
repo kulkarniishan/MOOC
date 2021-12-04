@@ -7,6 +7,10 @@ import Footer from './components/Footer/Footer';
 import Profile from './components/Profile/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import About from './components/About/About';
+import Details from './components/Details/Details';
+import Contacts from './components/Contacts/Contacts';
+
 import { axiosInstance } from './axiosSetup';
 import { login } from './Redux/features/userSlice';
 import { useDispatch } from 'react-redux';
@@ -28,11 +32,16 @@ function App() {
 
   return (
     <div>
+
       {userSet && <>
         <Navbar />
+
         <Switch>
-          <Route path='/' exact component={Home} />
+          <Route path='/' component={Home} />
           <Route path='/profile' component={Profile} />
+          <Route path='/contacts' component={Contacts} />
+          <Route path='/about' component={About} />
+          <Route path='/details' component={Details} />
         </Switch>
         <Footer />
       </>
