@@ -1,4 +1,4 @@
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
@@ -62,7 +62,7 @@ export default function NavigationBar() {
 
   return (
     <>
-      <Navbar collapseOnSelect expanded={expanded} bg={'light'} variant={'light'} onToggle={setToggle} expand="md" className='mx-4'>
+      <Navbar collapseOnSelect expanded={expanded} bg={'light'} variant={'light'} onToggle={setToggle} expand="md" className='px-4 shadow'>
         <Navbar.Brand><Nav.Link eventKey="1" to="/" onClick={() => setExpanded(false)} exact as={NavLink} activeClassName="matched-profile" className="navbar-brand navbar-logo px-0 m-0 p-0"> Courses</Nav.Link></Navbar.Brand>
         <Nav className="ml-auto">
         </Nav>
@@ -73,8 +73,8 @@ export default function NavigationBar() {
               <Nav.Item><Nav.Link eventKey="2" onClick={() => setExpanded(false)} to="/aboutUs" exact as={NavLink} active={false} className="mx-1 hoverPropfornavlink">About Us</Nav.Link></Nav.Item>
 
               {!user && (<>
-                <Nav.Item><Nav.Link eventKey="3" onClick={() => { setExpanded(false); toggleloginModal() }} active={false} className="mx hoverPropfornavlink">Login</Nav.Link></Nav.Item>
-                <Nav.Item><Nav.Link eventKey="4" onClick={() => { setExpanded(false); togglesignupModal() }} active={false} className="mx-1 hoverPropfornavlink">Sign Up</Nav.Link></Nav.Item>
+                <Nav.Item className='ml-auto'><Nav.Link eventKey="3" onClick={() => { setExpanded(false); toggleloginModal() }} active={false} className="mx-1 btn modal-aqua-green"><span className='mx-3'>Login</span></Nav.Link></Nav.Item>
+                <Nav.Item className='mx-5'><Nav.Link eventKey="4" onClick={() => { setExpanded(false); togglesignupModal() }} active={false} className="mx-1 btn modal-aqua-green"><span className='mx-3'>Sign Up</span></Nav.Link></Nav.Item>
                 <Login loginOpen={loginModalOn} toggleloginModal={toggleloginModal} toggleBetweenTheModals={toggleBetweenTheModals} />
                 <SignUp signupOpen={signupModalOn} togglesignupModal={togglesignupModal} toggleBetweenTheModals={toggleBetweenTheModals} />
               </>)}

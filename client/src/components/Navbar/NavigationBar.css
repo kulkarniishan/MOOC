@@ -3,6 +3,22 @@
     margin-left: auto;
 }
 
+
+.modal-aqua-green{
+  color:#2db482 !important;
+  border-color: #2db482 !important;
+}
+
+.modal-aqua-green:hover{
+  color: white !important;
+  background-color: #2db482 !important;
+}
+
+.modal-aqua-green-filled{
+  color: white !important;
+  background-color: #2db482 !important;
+}
+
 @media screen and (min-width:768px) {
 .hoverPropfornavlink:hover{
   border-bottom-style: solid ;
