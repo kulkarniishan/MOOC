@@ -6,6 +6,7 @@ import image1 from '../../assets/images/1.png';
 import image2 from '../../assets/images/2.png';
 import image3 from '../../assets/images/3.png';
 import image4 from '../../assets/images/4.png';
+import { Link } from 'react-router-dom';
 
 
 export default function Home() {
@@ -166,22 +167,26 @@ export default function Home() {
                 <div className="col-10 mx-auto mt-3">
                     {searchResults.length === 0 ?
                         "no results Found" :
-                        searchResults.map((value, key) => <div key={key} >
-                            <div class="card mb-3 w-100 shadow p-3 mb-5 bg-white rounded">
-                                <div class="row no-gutters">
-                                    <div class="col-md-4">
-                                        <img src={value.thumbnail} class="card-img" alt="image" />
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{value.name}</h5>
-                                            <p class="card-text">{value.description}</p>
-                                            <p class="card-text"><small class="text-muted">Instructor(s): {value.instructor}</small></p>
+                        searchResults.map((value, key) =>
+                            <Link style={{ textDecoration: 'none' }} to={`/course/${value.id}`}>
+                                <div key={key} >
+                                    <div class="card mb-3 w-100 shadow p-3 mb-5 bg-white rounded">
+                                        <div class="row no-gutters">
+                                            <div class="col-md-4">
+                                                <img src={value.thumbnail} class="card-img" alt="image" />
+                                            </div>
+                                            <div class="col-md-8">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{value.name}</h5>
+                                                    <p class="card-text">{value.description}</p>
+                                                    <p class="card-text"><small class="text-muted">Instructor(s): {value.instructor}</small></p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>)
+                            </Link>
+                        )
                     }
                     <nav aria-label="Page navigation example">
                         <ul class="pagination">

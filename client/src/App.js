@@ -35,13 +35,12 @@ function App() {
 
       {userSet && <>
         <Navbar />
-
         <Switch>
-          <Route path='/' component={Home} />
+          <Route path='/' exact component={Home} />
           <Route path='/profile' component={Profile} />
           <Route path='/contacts' component={Contacts} />
           <Route path='/about' component={About} />
-          <Route path='/details' component={Details} />
+          <Route path='/course/:id' component={Details} />
         </Switch>
         <Footer />
       </>
