@@ -57,11 +57,11 @@ export default function SignUp(props) {
 
             })
             .catch(error => {
-                console.log(error.response);
-                if (error.response.status === 409) {
-                    setemailExists(true)
-                }
-                console.log(error.response)
+                // console.log(error.response);
+                // if (error.response.status === 409) {
+                //     setemailExists(true)
+                //}
+               // console.log(error.response)
             });
     }
 
