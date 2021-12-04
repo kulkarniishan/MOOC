@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 import { useDispatch } from 'react-redux'
 import { logout } from '../../Redux/features/userSlice'
 import { setWarning } from '../../Redux/features/warningSlice'
-import { IoSettingsSharp } from 'react-icons/io5'
 import { FaUserAlt } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { axiosInstance } from '../../axiosSetup';
@@ -82,7 +81,7 @@ export default function NavigationBar() {
                 <Nav.Item className='ml-auto'>
                   <NavDropdown title={
                     <div style={{ display: 'inline-block' }}>
-                      <div className='row ml-auto'>
+                      <div className='row ml-auto px-3'>
                         <div className=" nav-image-cropper mr-3" style={{ display: 'inline-block' }}>
                           <img src={user.image || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'} alt="profile Pic" className='nav-profile-pic' />
                         </div>
@@ -98,10 +97,12 @@ export default function NavigationBar() {
         </>
       </Navbar>
       {(warning && user) && (
-        <div className={'alert alert-primary alert-' + warning.type + ' alert-dismissible fade show mb-0'} role="alert">
-          <strong style={{ textTransform: 'uppercase' }}>{warning.type}!</strong> {warning.message}
-          <button type="button" className="close" data-dismiss="alert" aria-label="Close" onClick={() => dispatch(setWarning(null))}>
-            <span aria-hidden="true">&times;</span>
+        <div className={' alert alert-primary alert-' + warning.type + ' alert-dismissible fade show mb-0 d-flex between align-items-center'} role="alert">
+          <div className="col">
+            <strong style={{ textTransform: 'uppercase' }}>{warning.type}!</strong> {warning.message}
+          </div>
+          <button type="button" className="btn close" data-dismiss="alert" aria-label="Close" onClick={() => dispatch(setWarning(null))}>
+            <span className='h5 text-success' aria-hidden="true">&times;</span>
           </button>
         </div>)}
     </>
