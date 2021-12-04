@@ -6,18 +6,22 @@ import Footer from './components/Footer/Footer';
 import Profile from './components/Profile/Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
+import About from './components/About/About';
+import Details from './components/Details/Details';
+import Contacts from './components/Contacts/Contacts';
 
 function App() {
 
   return (
     <div>
       <Navbar />
-      <br />
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-      <br />
+      
       <Switch>
         <Route path='/' component={Home} />
         <Route path='/profile' component={Profile} />
+        <Route path='/contacts' component={Contacts} />
+        <Route path='/about' component={About} />
+        <Route path='/details' component={Details} />
       </Switch>
       <Footer />
     </div>

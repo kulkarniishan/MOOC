@@ -1,23 +1,24 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 
 function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand text-white" href="#">MOOC</a>
+        <Link className="navbar-brand text-white" href="#">MOOC</Link>
         <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav m-auto">
             <li class="nav-item">
-              <a className="nav-link active text-white text-uppercase me-3" aria-current="page" href="#">Home&nbsp;<i class="fas fa-home"></i></a>
+              <Link className="nav-link active text-white text-uppercase me-3" aria-current="page" to="/home">Home&nbsp;<i class="fas fa-home"></i></Link>
             </li>
             <li className="nav-item">
-              <a class="nav-link text-white text-uppercase me-3" href="#">About Us</a>
+              <Link class="nav-link text-white text-uppercase me-3" to="/about">About Us</Link>
             </li>
             <li className="nav-item">
-              <a class="nav-link text-white text-uppercase" href="#">Contact Us</a>
+              <Link class="nav-link text-white text-uppercase" to="/contact">Contact Us</Link>
             </li>
             
           </ul>
