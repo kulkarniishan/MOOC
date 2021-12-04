@@ -56,9 +56,9 @@ function get($conn, $get)
         $datasetArray = array();
         while ($record = mysqli_fetch_assoc($result)) {
             $datasetArray[] = $record;
-            http_response_code(200);
-            echo json_encode($datasetArray);
         }
+        http_response_code(200);
+        echo json_encode($datasetArray);
     }
 }
 

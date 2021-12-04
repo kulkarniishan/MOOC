@@ -17,9 +17,9 @@ function get_table_records(){
         foreach($datasetArray as $record){
             $firstname = $record['firstname'];
             $lastname = $record['lastname'];
-            $emailId = $record['emailId'];
+            $email = $record['email'];
             $gender = $record['gender'];
-            echo "<tr><td>$firstname</td><td>$lastname</td><td>$emailId</td><td>$gender</td><tr>";
+            echo "<tr><td>$firstname</td><td>$lastname</td><td>$email</td><td>$gender</td><tr>";
         }
     }
 };
