@@ -26,21 +26,16 @@ export default function Login(props) {
     const dispatch = useDispatch();
 
     const onSubmit = data => {
-        axiosInstance.post('api/login', data, { withCredentials: true })
+        axiosInstance.post('/auth/login.php', data, { withCredentials: true })
             .then(response => {
+                console.log(response);
                 setAccountExists(true)
-                axiosInstance.get('api/user', { withCredentials: true })
-                    .then(response => {
-                        dispatch(login(response.data.userData))
-                        history.push('/Users')
-                        props.toggleloginModal()
-                        dispatch(setWarning({
-                            type: 'success', message: 'You have successfully logged in.'
-                        }))
-                    })
-                    .catch(error => {
-                        console.log(error.response)
-                    });
+                dispatch(login(response.data.user))
+                history.push('/Users')
+                props.toggleloginModal()
+                dispatch(setWarning({
+                    type: 'success', message: 'You have successfully logged in.'
+                }))
             })
             .catch(error => {
                 if (error.status === 401) {

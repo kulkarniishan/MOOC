@@ -26,11 +26,7 @@ let schema = yup.object().shape({
     lastname: yup.string().required(),
     email: yup.string().email().required(),
     password: yup.string().min(6).max(15).required(),
-    type: yup.string().required(),
-    eventName: yup.string().when("type", {
-        is: "organizer",
-        then: yup.string().required("Must enter the Event Name!")
-    })
+    gender: yup.string().required(),
 });
 
 export default function SignUp(props) {
@@ -41,29 +37,27 @@ export default function SignUp(props) {
     const { register, handleSubmit, control, formState: { errors }, setValue } = useForm({
         resolver: yupResolver(schema),
     });
+    console.log(errors);
     const onSubmit = data => {
-        axiosInstance.post('api/register', data, { withCredentials: true })
+        axiosInstance.post('auth/signup.php', data, { withCredentials: true })
             .then(response => {
                 setemailExists(false)
                 setValue('firstname', '');
                 setValue('lastname', '');
                 setValue('email', '');
                 setValue('password', '')
-                setValue('type', 'submitter');
-                setValue('eventName', '');
-
-                axiosInstance.get('api/user', { withCredentials: true })
-                    .then(response => {
-                        dispatch(login(response.data.userData))
-                        history.push('/Users')
-                        props.togglesignupModal()
-                        dispatch(setWarning({
-                            type: 'success', message: 'You have successfully signed in.'
-                        }))
-                    })
+                setValue('gender', 'Male');
+                console.log(response);
+                dispatch(login(response.data.user))
+                history.push('/Users')
+                props.togglesignupModal()
+                dispatch(setWarning({
+                    type: 'success', message: 'You have successfully signed in.'
+                }))
 
             })
             .catch(error => {
+                console.log(error.response);
                 if (error.response.status === 409) {
                     setemailExists(true)
                 }
@@ -109,7 +103,7 @@ export default function SignUp(props) {
                                             rules={{ required: true }}
                                             control={control}
                                             defaultValue="Male"
-                                            name="type"
+                                            name="gender"
                                             render={({ field }) => (
                                                 <RadioGroup {...field}>
                                                     <FormControlLabel

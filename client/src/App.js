@@ -18,7 +18,7 @@ function App() {
   useEffect(() => {
     axiosInstance.get('/user/get.php', { withCredentials: true })
       .then(response => {
-        dispatch(login(response.data.userData))
+        dispatch(login(response.data.user))
       })
       .catch(error => {
         console.log(error.response)

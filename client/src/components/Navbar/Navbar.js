@@ -12,6 +12,7 @@ import { IoSettingsSharp } from 'react-icons/io5'
 import { FaUserAlt } from 'react-icons/fa'
 import { FiLogOut } from 'react-icons/fi'
 import { axiosInstance } from '../../axiosSetup';
+import './NavigationBar.css'
 
 
 export default function NavigationBar() {
@@ -48,7 +49,7 @@ export default function NavigationBar() {
   }
 
   const handleLogout = async () => {
-    await axiosInstance.get('/api/logout.php', { withCredentials: true })
+    await axiosInstance.get('/auth/logout.php', { withCredentials: true })
       .then(response => {
         dispatch(logout())
       })
@@ -68,30 +69,27 @@ export default function NavigationBar() {
         <>
           <Navbar.Toggle onClick={() => setExpanded(!expanded)} aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav className="ml-auto">
+            <Nav className='w-100'>
               <Nav.Item><Nav.Link eventKey="2" onClick={() => setExpanded(false)} to="/aboutUs" exact as={NavLink} active={false} className="mx-1 hoverPropfornavlink">About Us</Nav.Link></Nav.Item>
 
               {!user && (<>
-                <Nav.Item><Nav.Link eventKey="4" onClick={() => { setExpanded(false); toggleloginModal() }} active={false} className="mx-1 hoverPropfornavlink">Login</Nav.Link></Nav.Item>
-                <Nav.Item><Nav.Link eventKey="5" onClick={() => { setExpanded(false); togglesignupModal() }} active={false} className="mx-1 hoverPropfornavlink">Sign Up</Nav.Link></Nav.Item>
+                <Nav.Item><Nav.Link eventKey="3" onClick={() => { setExpanded(false); toggleloginModal() }} active={false} className="mx hoverPropfornavlink">Login</Nav.Link></Nav.Item>
+                <Nav.Item><Nav.Link eventKey="4" onClick={() => { setExpanded(false); togglesignupModal() }} active={false} className="mx-1 hoverPropfornavlink">Sign Up</Nav.Link></Nav.Item>
                 <Login loginOpen={loginModalOn} toggleloginModal={toggleloginModal} toggleBetweenTheModals={toggleBetweenTheModals} />
                 <SignUp signupOpen={signupModalOn} togglesignupModal={togglesignupModal} toggleBetweenTheModals={toggleBetweenTheModals} />
               </>)}
               {user && <>
-                <Nav.Item><Nav.Link eventKey="6" onClick={() => setExpanded(false)} to="/dashbord" as={NavLink} active={false} className="mx-1 hoverPropfornavlink">Dashbord</Nav.Link></Nav.Item>
-                <Nav.Item>
+                <Nav.Item className='ml-auto'>
                   <NavDropdown title={
                     <div style={{ display: 'inline-block' }}>
-                      <div className='row ml-0'>
+                      <div className='row ml-auto'>
                         <div className=" nav-image-cropper mr-3" style={{ display: 'inline-block' }}>
                           <img src={user.image || 'https://t4.ftcdn.net/jpg/00/64/67/63/360_F_64676383_LdbmhiNM6Ypzb3FM4PPuFP9rHe7ri8Ju.jpg'} alt="profile Pic" className='nav-profile-pic' />
                         </div>
                       </div>
                     </div>
                   } id="navbarScrollingDropdown">
-                    {(user.type.toLowerCase() === 'submitter') &&
-                      <NavDropdown.Item onClick={() => setExpanded(false)} as={NavLink} to='/profile' activeClassName=""><FaUserAlt /> View profile</NavDropdown.Item>}
-                    <NavDropdown.Item onClick={() => setExpanded(false)} as={NavLink} to='/Users' activeClassName=""><IoSettingsSharp /> Account Settings</NavDropdown.Item>
+                    <NavDropdown.Item onClick={() => setExpanded(false)} as={NavLink} to='/profile' activeClassName=""><FaUserAlt /> View profile</NavDropdown.Item>
                     <NavDropdown.Item onClick={handleLogout}><FiLogOut /> Logout</NavDropdown.Item>
                   </NavDropdown>
                 </Nav.Item></>}
