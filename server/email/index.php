@@ -1,5 +1,5 @@
 <?php
-$to = 'ishan.kulkarni@somaiya.edu';
+$to = 'ishan.kulkarni@somaiya.edu, ishanak1602@gmail.com';
 $subject = 'Verify Email';
 $from = 'ishanak1602@gmail.com';
  
