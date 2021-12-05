@@ -12,6 +12,7 @@ export default function Course(props) {
             .then((response) => {
                 console.log(response)
                 setcourseVideoData(response.data)
+                
             })
             .catch((error) => console.log(error))
     }, [])
@@ -29,7 +30,7 @@ export default function Course(props) {
                                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                     {
                                         courseVideoData.map((value, key) =>
-                                            <li className="w-100 mb-2" key={key}><NavLink to={`/course/${props.match.params.id}/video/${key}`} class="nav-link text-decoration-none" activeClassName='text-light text-decoration-none' style={{ textDecoration: 'none'}}>{value.title}</NavLink></li>
+                                            <li className="w-100 mb-2" key={key}><NavLink to={`/course/${props.match.params.id}/video/${key}`} class="nav-link text-decoration-none" activeClassName='text-light text-decoration-none' style={{ textDecoration: 'none' }}>{value.title}</NavLink></li>
                                         )
                                     }
                                 </ul>
