@@ -1,4 +1,5 @@
 import React, { Component, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import image7 from '../../assets/images/7.png';
 import { axiosInstance } from "../../axiosSetup";
 
@@ -7,16 +8,15 @@ export default function Details(props) {
     const [courseData, setcourseData] = useState(null)
     useEffect(() => {
         axiosInstance.get('/courses/getcourse.php?courseId=' + props.match.params.id, { withCredentials: true })
-            .then((response) =>
-            {
+            .then((response) => {
                 console.log(response)
                 setcourseData(response.data[0])
             })
             .catch((error) => console.log(error))
     }, [])
 
-    const handleEnroll = ()=>{
-    
+    const handleEnroll = () => {
+
     }
     return (<>{
         courseData ?
@@ -31,7 +31,9 @@ export default function Details(props) {
                                     <span class="highlight-word"></span></h1><br></br>
                                 <p class="lead">Instructor(s): {courseData.instructor} </p>
                                 <span class="text-center d-inline-block"><br></br><br></br>
-                                    <button class="btn btn-success btn-lg w-100"  onClick={handleEnroll}>Enroll Now</button>
+                                    <button class="btn btn-success btn-lg w-100" onClick={handleEnroll}>Enroll Now</button>
+                                    <Link to={`/course/${props.match.params.id}`} class="btn btn-success btn-lg w-100">Go to course</Link>
+
                                     <p class="text-muted">No credit card required</p>
                                 </span>
 

@@ -168,7 +168,7 @@ export default function Home() {
                     {searchResults.length === 0 ?
                         "no results Found" :
                         searchResults.map((value, key) =>
-                            <Link style={{ textDecoration: 'none' }} to={`/course/${value.id}`}>
+                            <Link style={{ textDecoration: 'none' }} to={`/course_details/${value.id}`}>
                                 <div key={key} >
                                     <div class="card mb-3 w-100 shadow p-3 mb-5 bg-white rounded">
                                         <div class="row no-gutters">

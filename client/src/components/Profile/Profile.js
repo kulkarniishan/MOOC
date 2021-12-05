@@ -7,12 +7,23 @@ import { axiosInstance } from '../../axiosSetup'
 import { setWarning } from '../../Redux/features/warningSlice'
 import { useDispatch } from 'react-redux'
 import { login } from '../../Redux/features/userSlice'
+import { FormGroup, FormControlLabel, Checkbox, withStyles } from '@material-ui/core'
 
 let schema = yup.object().shape({
     firstname: yup.string().required(),
     lastname: yup.string().required(),
     phone: yup.string().max(15),
 });
+
+const GreenCheckBox = withStyles({
+    root: {
+        color: "rgb(0, 196, 152)",
+        "&$checked": {
+            color: "rgb(0, 196, 152)"
+        }
+    },
+    checked: {}
+})((props) => <Checkbox color="default" {...props} />);
 
 export default function () {
     const user = useSelector(state => state.user.user)
@@ -171,6 +182,9 @@ export default function () {
                                                         <input type="text" class="form-control" defaultValue={user.phone} {...register('phone')} />
                                                     </div>
                                                 </div>
+                                                <FormGroup>
+                                                    <FormControlLabel control={<GreenCheckBox defaultChecked={user.newsletterSubscribed == '1' ? true : false} {...register('newsletterSubscribed')} onChange={(e) => setValue('newsletterSubscribed', e.target.checked)} />} label="Subscribe to the news letter" />
+                                                </FormGroup>
                                                 <div class="row">
                                                     <div class="col-sm-3"></div>
                                                     <div class="col-sm-9 text-secondary">

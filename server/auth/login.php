@@ -4,22 +4,28 @@ require "../vendor/autoload.php";
 
 use \Firebase\JWT\JWT;
 
-header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Credentials: true");
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
 
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    // The request is using the POST method
+    header("HTTP/1.1 200 OK");
+    return;
+
+}
+
 $privateKey = file_get_contents('../private.pem');
 $email = '';
 $password = '';
-
 
 $data = json_decode(file_get_contents("php://input"));
 
 $email = $data->email;
 $checkpwd = $data->password;
-
 // $email = $_POST['email'];
 // $checkpwd = $_POST['password'];
 foreach ($_POST as $key => $value) {
@@ -68,26 +74,27 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 )
             );
 
-            $jwt = JWT::encode($token, $privateKey,'RS256');
-            print_r($jwt);
-            $jwtToken = json_encode(
-                array(
-                    "message" => "Successful login.",
-                    "jwt" => $jwt,
-                    "email" => $email,
-                    "expireAt" => $expire_claim
-                )
-            );
+            $jwt = JWT::encode($token, $privateKey, 'RS256');
             http_response_code(200);
+            unset($row['password']);
+            unset($row['id']);
 
             setcookie("jwt", $jwt, $expire_claim, "/", httponly: true);
-            echo json_encode(array("message" => "Success", "status" => 200));
+            echo json_encode(
+                array(
+                    "message" => "Success", "status" => 200, "user" =>$row
+                )
+            );
         } else {
 
             http_response_code(403);
 
             echo json_encode(array("message" => "Login failed.", "status" => 403));
         }
+    } else {
+        http_response_code(403);
+
+        echo json_encode(array("message" => "Login failed.", "status" => 403));
     }
 }
 

@@ -99,6 +99,7 @@ export default function SignUp(props) {
                                 </div>
                                 <div className="row my-2">
                                     <div className="col">
+
                                         <Controller
                                             rules={{ required: true }}
                                             control={control}

@@ -14,6 +14,7 @@ import Contacts from './components/Contacts/Contacts';
 import { axiosInstance } from './axiosSetup';
 import { login } from './Redux/features/userSlice';
 import { useDispatch } from 'react-redux';
+import Course from './components/Course/Course';
 function App() {
 
   const dispatch = useDispatch();
@@ -40,7 +41,8 @@ function App() {
           <Route path='/profile' component={Profile} />
           <Route path='/contacts' component={Contacts} />
           <Route path='/about' component={About} />
-          <Route path='/course/:id' component={Details} />
+          <Route path='/course_details/:id' exact component={Details} />
+          <Route path='/course/:id' component={Course} />
         </Switch>
         <Footer />
       </>

@@ -67,7 +67,7 @@ export default function Course() {
                             <i class="fs-4 bi-people"></i> <span class="ms-1 d-none d-sm-inline">Customers</span> </a>
                     </li>
                 </ul>
-                <hr>
+                <hr/>
                 <div class="dropdown pb-4">
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src={image8} alt="hugenerd" width="30" height="30" class="rounded-circle" />
@@ -83,7 +83,7 @@ export default function Course() {
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
                 </div>
-                </hr>
+                <hr/>
             </div>
         </div>
         <div class="col py-3">
