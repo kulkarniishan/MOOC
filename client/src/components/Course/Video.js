@@ -17,3 +17,19 @@ export default function Video(props) {
 
     );
 }
+
+        // <div>
+        //     <div className="container">
+        //         <div className="row">
+        //             <div className="h1">Title</div>
+        //         </div>
+            
+        //         <video width="100%" controls autoplay>
+        //             <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+        //         </video>
+        //     </div>
+
+
+        // </div>
+ //   )
+//}
