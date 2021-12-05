@@ -41,8 +41,9 @@ function App() {
           <Route path='/profile' component={Profile} />
           <Route path='/contacts' component={Contacts} />
           <Route path='/about' component={About} />
-          <Route path='/course_details/:id' exact component={Details} />
+          <Route path='/course_details/:id' component={Details} />
           <Route path='/course/:id' component={Course} />
+          
         </Switch>
         <Footer />
       </>
