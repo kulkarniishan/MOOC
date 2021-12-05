@@ -6,17 +6,30 @@ import { axiosInstance } from "../../axiosSetup";
 
 export default function Details(props) {
     const [courseData, setcourseData] = useState(null)
+    const [userEnrolled, setUserEnrolled] = useState(false)
     useEffect(() => {
         axiosInstance.get('/courses/getcourse.php?courseId=' + props.match.params.id, { withCredentials: true })
             .then((response) => {
                 console.log(response)
                 setcourseData(response.data[0])
+
+                axiosInstance.get('/user_enrolled_courses/isUserEnrolled.php?courseId=' + props.match.params.id, { withCredentials: true })
+                    .then((response) => {
+                        console.log(response)
+                        setUserEnrolled(response.data == 1 ? 'true' : false)
+                    })
+                    .catch((error) => console.log(error))
             })
             .catch((error) => console.log(error))
     }, [])
 
     const handleEnroll = () => {
-
+        axiosInstance.get('/user_enrolled_courses/enrollCourses.php?courseId=' + props.match.params.id, { withCredentials: true })
+            .then((response) => {
+                console.log(response)
+                setUserEnrolled(response.data == 1 ? 'true' : false)
+            })
+            .catch((error) => console.log(error))
     }
     return (<>{
         courseData ?
@@ -30,9 +43,11 @@ export default function Details(props) {
                                     {courseData.name}
                                     <span class="highlight-word"></span></h1><br></br>
                                 <p class="lead">Instructor(s): {courseData.instructor} </p>
-                                <span class="text-center d-inline-block"><br></br><br></br>
-                                    <button class="btn btn-success btn-lg w-100" onClick={handleEnroll}>Enroll Now</button>
-                                    <Link to={`/course/${props.match.params.id}`} class="btn btn-success btn-lg w-100">Go to course</Link>
+                                <span class="text-center d-inline-block"><br></br><br></br>{
+                                    userEnrolled ? <Link to={`/course/${props.match.params.id}`} class="btn btn-info btn-lg w-100">Go to course</Link>
+                                        : <button class="btn btn-success btn-lg w-100" onClick={handleEnroll}>Enroll Now</button>
+
+                                }
 
                                     <p class="text-muted">No credit card required</p>
                                 </span>

@@ -4,7 +4,22 @@ include_once '../config/dbconfig.php';
 
 $datasetArray = array();
 
+function createList($emails){
+    $emailArray = array();
+    global $conn;
+    
+    $sql = "SELECT * FROM userprofile";
+    $result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
+
+    while ($record = mysqli_fetch_assoc($result)) {
+        $emailArray[] = $record['email'];
+    }
+    $list =implode(', ', $emailArray);;
+    return $list;
+}
+
 if (isset($_POST['retrive'])) {
+    
     $sql = "SELECT * FROM userprofile";
     $result = mysqli_query($conn, $sql) or die("Bad Query: $sql");
 
@@ -12,31 +27,32 @@ if (isset($_POST['retrive'])) {
         $datasetArray[] = $record;
     }
 } else if (isset($_POST['send'])) {
+    
     echo "sending emails";
-    $to = 'ishan.kulkarni@somaiya.edu, ishanak1602@gmail.com';
+    // $to = 'ishan.kulkarni@somaiya.edu, ishanak1602@gmail.com';
     $subject = 'Verify Email';
     $from = 'ishanak1602@gmail.com';
-    print_r($_POST['message']);
+    
+    $to = createList($datasetArray);
 
+        // To send HTML mail, the Content-type header must be set
+    $headers  = 'MIME-Version: 1.0' . "\r\n";
+    $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
 
-    //     // To send HTML mail, the Content-type header must be set
-    // $headers  = 'MIME-Version: 1.0' . "\r\n";
-    // $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
+    // Create email headers
+    $headers .= 'From: '.$from."\r\n".
+        'Reply-To: '.$from."\r\n" .
+        'X-Mailer: PHP/' . phpversion();
 
-    // // Create email headers
-    // $headers .= 'From: '.$from."\r\n".
-    //     'Reply-To: '.$from."\r\n" .
-    //     'X-Mailer: PHP/' . phpversion();
+    // Compose a simple HTML email message
+    $message = $_POST['message'];
 
-    // // Compose a simple HTML email message
-    // $message = ;
-
-    // // Sending email
-    // if(mail($to, $subject, $message, $headers)){
-    //     echo 'Your mail has been sent successfully.';
-    // } else{
-    //     echo 'Unable to send email. Please try again.';
-    // }
+    // Sending email
+    if(mail($to, $subject, $message, $headers)){
+        echo 'Your mail has been sent successfully.';
+    } else{
+        echo 'Unable to send email. Please try again.';
+    }
 
 }
 
@@ -143,7 +159,7 @@ function get_table_records()
         </button>
     </form>
     <form action="subsemail.php" method="post">
-        <textarea name="messagae" id="message" cols="50" rows="10"></textarea>
+        <textarea name="message" id="message" cols="50" rows="10"></textarea>
         </br>
         <button type="submit" name="send">Send Emails
         </button>

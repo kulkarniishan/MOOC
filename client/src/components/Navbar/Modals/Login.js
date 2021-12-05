@@ -31,7 +31,7 @@ export default function Login(props) {
                 console.log(response);
                 setAccountExists(true)
                 dispatch(login(response.data.user))
-                history.push('/Users')
+                history.push('/profile')
                 props.toggleloginModal()
                 dispatch(setWarning({
                     type: 'success', message: 'You have successfully logged in.'

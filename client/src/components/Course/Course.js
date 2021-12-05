@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Component } from "react";
-import { NavLink, Route,Switch } from "react-router-dom";
+import { NavLink, Route, Switch, Redirect } from "react-router-dom";
 import image8 from '../../assets/images/8.jpg';
 import { axiosInstance } from "../../axiosSetup";
 import Video from "./Video";
@@ -29,7 +29,7 @@ export default function Course(props) {
                                 <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
                                     {
                                         courseVideoData.map((value, key) =>
-                                            <li className="w-100" key={key}><NavLink to={`/course/${props.match.params.id}/video/${key}`} class="nav-link px-0 text-decoration-none">{value.title}</NavLink></li>
+                                            <li className="w-100 mb-2" key={key}><NavLink to={`/course/${props.match.params.id}/video/${key}`} class="nav-link text-decoration-none" activeClassName='text-light text-decoration-none' style={{ textDecoration: 'none'}}>{value.title}</NavLink></li>
                                         )
                                     }
                                 </ul>
@@ -37,7 +37,8 @@ export default function Course(props) {
                         </div>
                         <div class="col py-3">
                             <Switch>
-                                <Route path={`/course/${props.match.params.id}/video/:id`} component={Video} />
+                                <Redirect from={`/course/${props.match.params.id}`} exact to={`/course/${props.match.params.id}/video/0`} />
+                                <Route path={`/course/${props.match.params.id}/video/:id`} exact render={(props) => <Video {...props} details={courseVideoData} />} />
                             </Switch>
                         </div>
                     </div>

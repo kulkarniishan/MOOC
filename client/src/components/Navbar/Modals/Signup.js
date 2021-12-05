@@ -49,7 +49,7 @@ export default function SignUp(props) {
                 setValue('gender', 'Male');
                 console.log(response);
                 dispatch(login(response.data.user))
-                history.push('/Users')
+                history.push('/profile')
                 props.togglesignupModal()
                 dispatch(setWarning({
                     type: 'success', message: 'You have successfully signed in.'
